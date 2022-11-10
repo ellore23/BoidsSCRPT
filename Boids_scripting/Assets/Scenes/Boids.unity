@@ -332,7 +332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boids: []
-  boidLeader: {fileID: 0}
   centerStrength: 0
   generalBoidsDistance: 0
   avoidnessStrenght: 0

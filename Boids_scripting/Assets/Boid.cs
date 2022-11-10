@@ -25,6 +25,8 @@ public class Boid : MonoBehaviour
     // Alligning boids to poland
     public float alignBoidStrenght;
     public float generalBoidsAlignment;
+    Vector3 directionAvg;
+    int otherclosenessChecker;
 
 
 
@@ -33,15 +35,15 @@ public class Boid : MonoBehaviour
         AlligningBoids();
         MovingBoidsClose();
         AvoidingBirds();
-        transform.Translate(direction * (speed *Time.deltaTime));
+        transform.Translate(direction * (speed * Time.deltaTime));
     }
 
     void MovingBoidsClose()
-    {    
-        foreach(Boid boid in boids)
+    {
+        foreach (Boid boid in boids)
         {
             float distanceBetween = Vector3.Distance(boid.transform.position, transform.position);
-            if(distanceBetween <= generalBoidsDistance)
+            if (distanceBetween <= generalBoidsDistance)
             {
                 boidsPositionInScene += boid.transform.position;
                 closenessChecker++;
@@ -77,6 +79,22 @@ public class Boid : MonoBehaviour
 
     void AlligningBoids()
     {
-        
+        foreach (Boid boid in boids)
+        {
+            float distanceBetween = Vector3.Distance(boid.transform.position, transform.position);
+            if (distanceBetween <= generalBoidsAlignment)
+            {
+                directionAvg += boid.direction;
+                otherclosenessChecker++;
+            }
+
+        }
+
+        Vector3 dir = directionAvg / otherclosenessChecker;
+        dir = dir.normalized;
+
+        float time = alignBoidStrenght * Time.deltaTime;
+        direction = direction + time * dir / (time + 1);
+        direction = direction.normalized;
     }
 }
