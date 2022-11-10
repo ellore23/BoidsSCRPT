@@ -11,20 +11,32 @@ public class Boid : MonoBehaviour
 
     public GameObject boidLeader;
 
-    // Boids close checker
+    // moving da flock to poland(center) checker
     public float centerStrength;
     public float generalBoidsDistance;
     Vector3 boidsPositionInScene;
     int closenessChecker;
 
+    // Avoiding da plebe checker
+    public float avoidnessStrenght;
+    public float generalcollisionAvoidness;
+    Vector3 movingFarFromdaBoid;
+
+    // Alligning boids to poland
+    public float alignBoidStrenght;
+    public float generalBoidsAlignment;
+
+
 
     void FixedUpdate()
     {
-        KeepFlockClose();
+        AlligningBoids();
+        MovingBoidsClose();
+        AvoidingBirds();
         transform.Translate(direction * (speed *Time.deltaTime));
     }
 
-    void KeepFlockClose()
+    void MovingBoidsClose()
     {    
         foreach(Boid boid in boids)
         {
@@ -44,5 +56,27 @@ public class Boid : MonoBehaviour
         direction = direction + time * faceDirection / (time + 1);
         direction = direction.normalized;
 
+    }
+
+    void AvoidingBirds()
+    {
+        foreach (Boid boid in boids)
+        {
+            float distanceBetween = Vector3.Distance(boid.transform.position, transform.position);
+            if (distanceBetween <= generalcollisionAvoidness)
+            {
+                movingFarFromdaBoid = movingFarFromdaBoid + (transform.position - boid.transform.position);
+            }
+        }
+
+        movingFarFromdaBoid = movingFarFromdaBoid.normalized;
+
+        direction = direction + avoidnessStrenght * movingFarFromdaBoid / (avoidnessStrenght + 1);
+        direction = direction.normalized;
+    }
+
+    void AlligningBoids()
+    {
+        
     }
 }
