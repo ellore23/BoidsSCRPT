@@ -97,12 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5199137232ce7e241b0d21b497b9db4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boidsList: []
-  birdsInBoid: 50
-  boidGameObject: {fileID: 781961380111375618}
-  centerStrength: 0
-  generalBoidsDistance: 0
-  avoidnessStrenght: 0
-  generalcollisionAvoidness: 0
-  alignBoidStrenght: 0
-  generalBoidsAlignment: 0
+  centerStrength: 1
+  generalBoidsDistance: 1
+  avoidnessStrenght: 1
+  generalcollisionAvoidness: 1
+  alignBoidStrenght: 1
+  generalBoidsAlignment: 1

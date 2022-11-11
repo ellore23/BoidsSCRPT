@@ -6,49 +6,36 @@ using UnityEngine;
 public class Boid : MonoBehaviour
 {
 
-    private float speed;
+    private float speed = 10;
     Vector3 direction;
-    public List<Boid> boidsList;
-    public int birdsInBoid = 50;
-
-    public Boid boidGameObject;
+    
 
     // moving da flock to poland(center) checker
-    public float centerStrength;
-    public float generalBoidsDistance;
+    public float centerStrength = 3;
+    public float generalBoidsDistance = 3;
     Vector3 boidsPositionInScene;
     int closenessChecker;
 
     // Avoiding da plebe checker
-    public float avoidnessStrenght;
-    public float generalcollisionAvoidness;
+    public float avoidnessStrenght = 3;
+    public float generalcollisionAvoidness = 3;
     Vector3 movingFarFromdaBoid;
 
     // Alligning boids to poland
-    public float alignBoidStrenght;
-    public float generalBoidsAlignment;
+    public float alignBoidStrenght = 3;
+    public float generalBoidsAlignment = 3;
     Vector3 directionAvg;
     int otherclosenessChecker;
 
-    private void Start()
+    public void BoidsMovement(List<Boid> boidsList)
     {
-        boidsList = new List<Boid>();
-
-        for(int i = 0; i<birdsInBoid; i++)
-        {
-            CreateBoid(boidGameObject.gameObject, 0);
-        }
+        AlligningBoids(boidsList);
+        MovingBoidsClose(boidsList);
+        AvoidingBirds(boidsList);
+        this.transform.Translate(direction * (speed * Time.deltaTime));
     }
 
-    void FixedUpdate()
-    {
-        AlligningBoids();
-        MovingBoidsClose();
-        AvoidingBirds();
-        transform.Translate(direction * (speed * Time.deltaTime));
-    }
-
-    void MovingBoidsClose()
+    void MovingBoidsClose(List<Boid> boidsList)
     {
         foreach (Boid boid in boidsList)
         {
@@ -70,7 +57,7 @@ public class Boid : MonoBehaviour
 
     }
 
-    void AvoidingBirds()
+    void AvoidingBirds(List<Boid> boidsList)
     {
         foreach (Boid boid in boidsList)
         {
@@ -87,7 +74,7 @@ public class Boid : MonoBehaviour
         direction = direction.normalized;
     }
 
-    void AlligningBoids()
+    void AlligningBoids(List<Boid> boidsList)
     {
         foreach (Boid boid in boidsList)
         {
@@ -108,12 +95,5 @@ public class Boid : MonoBehaviour
         direction = direction.normalized;
     }
 
-    void CreateBoid(GameObject prefab, int swarmindex) {
-        var boidCreated = Instantiate(prefab);
-        boidCreated.transform.localPosition += new Vector3(UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10));
-        Boid boidScript = boidCreated.GetComponent<Boid>();
-
-        boidsList.Add(boidScript);
     
-    }
 }
