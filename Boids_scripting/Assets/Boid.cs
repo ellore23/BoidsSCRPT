@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,10 @@ public class Boid : MonoBehaviour
 
     private float speed;
     Vector3 direction;
-    public List<Boid> boids;
+    public List<Boid> boidsList;
+    public int birdsInBoid = 50;
 
-    public GameObject boidLeader;
+    public Boid boidGameObject;
 
     // moving da flock to poland(center) checker
     public float centerStrength;
@@ -28,7 +30,15 @@ public class Boid : MonoBehaviour
     Vector3 directionAvg;
     int otherclosenessChecker;
 
+    private void Start()
+    {
+        boidsList = new List<Boid>();
 
+        for(int i = 0; i<birdsInBoid; i++)
+        {
+            CreateBoid(boidGameObject.gameObject, 0);
+        }
+    }
 
     void FixedUpdate()
     {
@@ -40,7 +50,7 @@ public class Boid : MonoBehaviour
 
     void MovingBoidsClose()
     {
-        foreach (Boid boid in boids)
+        foreach (Boid boid in boidsList)
         {
             float distanceBetween = Vector3.Distance(boid.transform.position, transform.position);
             if (distanceBetween <= generalBoidsDistance)
@@ -62,7 +72,7 @@ public class Boid : MonoBehaviour
 
     void AvoidingBirds()
     {
-        foreach (Boid boid in boids)
+        foreach (Boid boid in boidsList)
         {
             float distanceBetween = Vector3.Distance(boid.transform.position, transform.position);
             if (distanceBetween <= generalcollisionAvoidness)
@@ -79,7 +89,7 @@ public class Boid : MonoBehaviour
 
     void AlligningBoids()
     {
-        foreach (Boid boid in boids)
+        foreach (Boid boid in boidsList)
         {
             float distanceBetween = Vector3.Distance(boid.transform.position, transform.position);
             if (distanceBetween <= generalBoidsAlignment)
@@ -96,5 +106,14 @@ public class Boid : MonoBehaviour
         float time = alignBoidStrenght * Time.deltaTime;
         direction = direction + time * dir / (time + 1);
         direction = direction.normalized;
+    }
+
+    void CreateBoid(GameObject prefab, int swarmindex) {
+        var boidCreated = Instantiate(prefab);
+        boidCreated.transform.localPosition += new Vector3(UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10));
+        Boid boidScript = boidCreated.GetComponent<Boid>();
+
+        boidsList.Add(boidScript);
+    
     }
 }

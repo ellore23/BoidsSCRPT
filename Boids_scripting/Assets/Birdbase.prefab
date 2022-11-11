@@ -94,17 +94,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 781961380111375618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b5c70fd21a69b4eb35ffe121927f8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5199137232ce7e241b0d21b497b9db4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boids:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  centerStrength: 2
-  generalBoidsDistance: 3
-  avoidnessStrenght: 3
-  generalcollisionAvoidness: 2
-  alignBoidStrenght: 3
-  generalBoidsAlignment: 3
+  boidsList: []
+  birdsInBoid: 50
+  boidGameObject: {fileID: 781961380111375618}
+  centerStrength: 0
+  generalBoidsDistance: 0
+  avoidnessStrenght: 0
+  generalcollisionAvoidness: 0
+  alignBoidStrenght: 0
+  generalBoidsAlignment: 0
