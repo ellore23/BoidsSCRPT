@@ -45,7 +45,7 @@ public class Boid : MonoBehaviour
             cohesionDirection /= cohesionCount;
         }
          cohesionDirection -= transform.position;
-
+        
         steering += separationDirection.normalized;
         steering += alignmentDirection.normalized;
         steering += cohesionDirection.normalized;
