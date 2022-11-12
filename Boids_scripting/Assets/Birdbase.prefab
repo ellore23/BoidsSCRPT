@@ -97,9 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5199137232ce7e241b0d21b497b9db4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerStrength: 0.1
-  generalBoidsDistance: 0.1
-  avoidnessStrenght: 0.1
-  generalcollisionAvoidness: 0.1
-  alignBoidStrenght: 0.1
-  generalBoidsAlignment: 0.1
+  index: 0
+  scriptCont: {fileID: 5843574974526822712, guid: 48f4c58b25e9ec447b2e323f69f5cce8, type: 3}

@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Boid : MonoBehaviour
 {      
-    public float noClumping = 5f;    
-    public float localArea = 5f;        
-    public float steeringSpeed = 100f;
-
     Vector3 steering = Vector3.zero;
     Vector3 separationDirection = Vector3.zero;
     float separationCount = 0;
@@ -16,18 +12,20 @@ public class Boid : MonoBehaviour
     Vector3 cohesionDirection = Vector3.zero;
     float cohesionCount = 0;
     public int index = 0;
-    public float speed = 10f;
+    
+
+    public Flyweight scriptCont;
 
     public void IndividualMovement(List<Boid> other){
         foreach (Boid boid in other){
             if (boid == this)
                 continue;
             float distance = Vector3.Distance(boid.transform.position, this.transform.position);
-            if (distance < noClumping){
+            if (distance < scriptCont.noClumping){
                 separationDirection += boid.transform.position - transform.position;
                 separationCount++;
             }
-            if (distance < localArea && boid.index == this.index){
+            if (distance < scriptCont.localArea && boid.index == this.index){
                 alignmentDirection += boid.transform.forward;
                 alignmentCount++;
                 cohesionDirection += boid.transform.position - transform.position;
@@ -53,10 +51,10 @@ public class Boid : MonoBehaviour
         steering += cohesionDirection.normalized;
 
         if (steering != Vector3.zero){
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(steering), steeringSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(steering), scriptCont.steeringSpeed * Time.deltaTime);
         }           
 
-        transform.position += transform.TransformDirection(new Vector3(0, 0, speed)) * Time.deltaTime;
+        transform.position += transform.TransformDirection(new Vector3(0, 0, scriptCont.speed)) * Time.deltaTime;
 
     }
 

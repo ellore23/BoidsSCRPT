@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Flyweight : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float speed = 10f;
+    public float noClumping = 5f;
+    public float localArea = 5f;
+    public float steeringSpeed = 100f;
 }
